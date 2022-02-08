@@ -1,6 +1,6 @@
 server {
     listen              80;
-    server_name		    dev01.my;
+    server_name         dev01.my;
 
     access_log          /var/log/nginx/dev01.access.log;
     error_log           /var/log/nginx/dev01.error.log;
