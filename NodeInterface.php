@@ -10,7 +10,7 @@ interface NodeInterface
     public function getName(): string;
 
     /**
-     * @return Node[]
+     * @return NodeInterface[]
      */
     public function getChildren(): array;
 

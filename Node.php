@@ -5,7 +5,8 @@ class Node implements NodeInterface
     private string $name = '';
     private array $children = [];
 
-    public function __construct(string $name)
+    public function __construct(string $name)/**конструктор - передаем на вход name -> сохраняем в пере
+    менную */
     {
         $this->name = $name;
     }
@@ -27,7 +28,7 @@ class Node implements NodeInterface
     }
     public function addChild(Node $node): self
     {
-        $this->children[] = $node;
+        $this->children[] = $node;//возвращаем сам объект класса
         return $this;
     }
     private static function print(Node $node, $level = 1)
