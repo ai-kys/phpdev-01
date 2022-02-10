@@ -100,7 +100,8 @@ function calc_army_damage_health($army)
 list($damage1, $health1) = calc_army_damage_health($army1);
 list($damage2, $health2) = calc_army_damage_health($army2);
 
-function every_line_damage($line1, $line2) {
+//поочередные сражения всех типов войск
+/*function every_line_damage($line1, $line2) {
     $result_of_line1 = 0;
     $result_of_line2 = 0;
     $damage_line1 = 0;
@@ -121,6 +122,7 @@ function every_line_damage($line1, $line2) {
 list($every_line_pehota1,$every_line_pehota2) = every_line_damage($army1['pehota'], $army2['pehota']);
 list($every_line_luchniki1,$every_line_luchniki2) = every_line_damage($army1['luchniki'], $army2['luchniki']);
 list($every_line_konnica1,$every_line_konnica2) = every_line_damage($army1['konnica'], $army2['konnica']);
+*/
 /*
 $duration = 0;
 $result1 = $health1;
