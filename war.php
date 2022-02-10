@@ -99,6 +99,28 @@ function calc_army_damage_health($army)
 
 list($damage1, $health1) = calc_army_damage_health($army1);
 list($damage2, $health2) = calc_army_damage_health($army2);
+
+function every_line_damage($line1, $line2) {
+    $result_of_line1 = 0;
+    $result_of_line2 = 0;
+    $damage_line1 = 0;
+    $damage_line2 = 0;
+    $health_line1 = 0;
+    $health_line2 = 0;
+    
+        $damage_line1 += ${$line1}['damage'] * $count;
+        $damage_line2 += ${$line2}['damage'] * $count;
+        $health_line1 += ${$line1}['health'] * $count + ${$line1}['armour'] * $count;
+        $health_line2 += ${$line2}['health'] * $count + ${$line2}['armour'] * $count;
+        $result_of_line1 = $health_line1 - $damage_line1;
+        $result_of_line2 = $health_line2 - $damage_line2;
+    
+    return [$result_of_line1, $result_of_line2];
+}
+
+list($every_line_pehota1,$every_line_pehota2) = every_line_damage($army1['pehota'], $army2['pehota']);
+list($every_line_luchniki1,$every_line_luchniki2) = every_line_damage($army1['luchniki'], $army2['luchniki']);
+list($every_line_konnica1,$every_line_konnica2) = every_line_damage($army1['konnica'], $army2['konnica']);
 /*
 $duration = 0;
 $result1 = $health1;
@@ -130,8 +152,9 @@ while($result1 > 0 && $result2 > 0) {
         <td><?=$health1?></td>
         <td><?=$health2?></td>
         <th>Army units:</th>
-        <td>unit1 (count), unit2(count), ...</td>
-        <td>unit1 (count), unit2(count), ...</td>
+        <td>pehota1 = <?=$every_line_pehota1?>, pehota2 = <?=$every_line_pehota2?></td>
+        <td>luchniki1 = <?=$every_line_luchniki1?>, luchniki2 = <?=$luchniki2?></td>
+        <td>konnica1 = <?=$every_line_konnica1?>, konnica2 = <?=$every_line_konnica2?></td>
     </tr>
 <?php
 $duration = 0;
