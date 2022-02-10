@@ -1,6 +1,26 @@
 <?php
-// Войска: пехота, конница, лучники.
 // Свойства: жизни, броня, урон
+abstract class Unit {
+    private $health;
+    private $armour;
+    private $damage;
+
+    public function __construct(int $health, int $armour, int $damage)
+    {
+        $this->health= $health;
+        $this->armour = $armour;
+        $this->damage = $damage;
+    }
+}
+// Войска: пехота, конница, лучники.
+abstract class Ryad extends Unit{
+    public function __construct(Array $properties=array()){
+    foreach($properties as $key => $value){
+      $this->{$key} = $value;
+    }
+  }
+}
+
 $pehota = [
     'health' => 100,
     'armour' => 10,
@@ -18,8 +38,29 @@ $konnica = [
     'armour' => 30,
     'damage' => 30,
 ];
+/*
+$arrayobject1 = new ArrayObject($pehota);
+$arrayobject2 = new ArrayObject($luchniki);
+$arrayobject3 = new ArrayObject($konnica);*/
+
+/*var_dump($arrayobject1);
+var_dump($arrayobject2);
+*/
 
 // Создаём две армии (кол-во юнитов)
+class Army extends Ryad {
+    private string $name = '';
+ 
+    public function __construct(string $name, Array $properties=array())
+    {
+        $this->name = $name;
+        foreach($properties as $key => $value){
+            
+                $this->{$key} = $value;   
+        }
+    }
+}
+
 $army1 = [
     'name' => 'Александр Ярославич',
     'units' => [
@@ -37,20 +78,42 @@ $army2 = [
     ]
 ];
 
+$object1 = new Army($army1['name'], $army1['units']);
+$object2 = new Army($army2['name'], $army2['units']);
+
 // Запускаем битву
-$damage1 = 0;
-$health1 = 0;
-foreach ($army1['units'] as $unit => $count) {
-    $damage1 += ${$unit}['damage'] * $count;
-    $health1 += ${$unit}['health'] * $count + ${$unit}['armour'] * $count;
+function calc_army_damage_health($army)
+{
+    global $pehota, $luchniki, $konnica;
+
+    $damage = 0;
+    $health = 0;
+
+    foreach ($army['units'] as $unit => $count) {
+        $damage += ${$unit}['damage'] * $count;
+        $health += ${$unit}['health'] * $count + ${$unit}['armour'] * $count;
+    }
+
+    return [$damage, $health];
+};
+
+list($damage1, $health1) = calc_army_damage_health($army1);
+list($damage2, $health2) = calc_army_damage_health($army2);
+/*
+$duration = 0;
+$result1 = $health1;
+$result2 = $health2;
+while($result1 > 0 && $result2 > 0) {
+    $result1 -= $damage2;
+    $result2 -= $damage1;
+    $duration++;
 }
-$damage2 = 0;
-$health2 = 0;
-foreach ($army2['units'] as $unit => $count) {
-    $damage2 += ${$unit}['damage'] * $count;
-    $health2 += ${$unit}['health'] * $count + ${$unit}['armour'] * $count;
-}
+*/
+
+/*print_r($object2->luchniki);*/
 ?>
+
+
 <table border="1">
     <tr>
         <th></th>
